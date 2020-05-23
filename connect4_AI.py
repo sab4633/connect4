@@ -31,6 +31,8 @@ size = (width, height)
 
 screen = pygame.display.set_mode(size)
 
+
+
 def drop_piece(board,row, col, piece):
     board[row][col] = piece
 
@@ -75,8 +77,9 @@ def winning_move(board,piece):
 def main():
     game_over = False
     board = create_board()
+    turn = random.randint(PLAYER, AI)
 
-    turn = 0
+
     pygame.display.update()
     draw_board(board)
     while not game_over:
@@ -93,8 +96,8 @@ def main():
                 posx = event.pos[0]
                 if turn%2 == 0:
                     pygame.draw.circle(screen,RED, (posx, int(SQUARESIZE/2)), RADIUS)
-                else:
-                    pygame.draw.circle(screen, YELLOW, (posx, int(SQUARESIZE / 2)), RADIUS)
+               # else:
+                    #pygame.draw.circle(screen, YELLOW, (posx, int(SQUARESIZE / 2)), RADIUS)
             pygame.display.update()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -124,10 +127,10 @@ def main():
 
         #ask for p2
         if turn == AI and not game_over:
-
+            print("I AM HERE")
             col = random.randint(0, COL_COUNT-1)
             if is_valid_location(board, col):
-                time.sleep(1)
+                #time.sleep(1)
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, 2)
                 draw_board(board)
