@@ -163,7 +163,7 @@ def create_board():
 
 
 def score_position(board, piece):
-    #Score Horizontal
+    ## score Horizontal
     score = 0
     for r in range(ROW_COUNT):
         row_array = [int(i) for i in list(board[r,:])]
@@ -173,6 +173,18 @@ def score_position(board, piece):
                 score += 100
             elif window.count(piece) == 3 and window.count(EMPTY) == 1:
                 score += 10
+
+    ## Score vertical
+    for c in range(COL_COUNT):
+        col_array = [int(i) for i in list(board[:,c])]
+        for r in range(ROW_COUNT-3):
+            window = col_array[r:r+WINDOW_LENGTH]
+            if window.count(piece) == 4:
+                score += 100
+            elif window.count(piece) == 3 and window.count(EMPTY) == 1:
+                score += 10
+
+
     return score
 
 def get_valid_locations(board):
